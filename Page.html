@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="en" dir="rtl">
 <head>
 
    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>📖 Book PDF WebReader</title>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+
    <style>
 
       * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,109 +13,97 @@
          flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; color: #ddd;
       }
 
-      .app-container { max-width: 1000px; width: 100%; background: #333; border-radius: 28px; padding: 24px; transition: all 0.2s; }
-
-      .upload-area {
-         display: flex; flex-wrap: wrap; align-items: center; gap: 16px; background: #444; padding: 18px 22px; 
-         border-radius: 22px; border: 1px dashed #a8b4c2; margin-bottom: 24px; transition: 0.2s;
+      .uploader { 
+         display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 18px 22px; margin-bottom: 24px; transition: 0.2s; 
+         position: absolute; right: 0; top: 0;
       }
 
-      .upload-area:hover { border-color: #3b82f6; background: #3a3a3a; }
-
-      .file-label {
-         background: #3b82f6; color: #ddd; padding: 10px 22px; border-radius: 40px; font-weight: 500; cursor: pointer;
+      .FileLabel {
+         background: #3b83f6a9; color: #ddd; padding: 8px 22px; border-radius: 40px; font-weight: 500; cursor: pointer;
          display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; border: none; font-size: 0.95rem;
          box-shadow: 0 4px 8px rgba(59, 130, 246, 0.25);
       }
 
-      .file-label:hover { background: #2563eb; transform: scale(1.01); } #fileInput { display: none; }
+      .FileLabel:hover { background: #216fec; }
 
-      .file-info {
+      .file-FileLabel:hover { background: #2563eb; transform: scale(1.01); } #fileInput { display: none; }
+
+      .FileInfo {
          flex: 1; color: #ddd; font-weight: 700; padding: 6px 16px; white-space: nowrap; overflow: hidden; 
          text-overflow: ellipsis; max-width: 300px;
       }
 
-      .status-badge { 
+      .Status { 
          background: #e9edf4; padding: 6px 18px; border-radius: 30px; font-size: 1.2rem; color: #334155;
          font-weight: 700; display: flex; align-items: center; gap: 6px;
       }
 
-      .status-badge.loading { background: #fef9c3; color: #854d0e; }
-      .status-badge.success { background: #dcfce7; color: #166534; }
+      .Status.loading { background: #fef9c3; color: #854d0e; }
+      .Status.success { background: #dcfce7; color: #166534; }
 
-      .controls {
-         display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 18px; padding: 12px 8px;
-         background: #555; border-radius: 60px; margin-bottom: 20px;
+      .Controls {
+         display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 14px; padding: 10px 8px; margin-bottom: 20px;
+         position: absolute; left: 0; top: 0;
       }
 
-      .controls button { 
+      .Controls button { 
          border: none; padding: 2px 18px; border-radius: 40px; font: 900 1.5rem system-ui; display: inline-flex;
          align-items: center; background-color: #0000; gap: 6px; cursor: pointer; transition: 0.15s; color: #ddd;
       }
 
-      .controls button:hover:not(:disabled) { background: #0000; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06); }
+      .Controls button:hover:not(:disabled) { background: #0000; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06); }
 
-      .controls button:disabled { opacity: 0.7; cursor: not-allowed; }
+      .Controls button:disabled { opacity: 0.7; cursor: not-allowed; }
 
-      .controls .page-indicator { 
-         background: transparent; border: none; font-weight: 550; color: #0f172a; padding: 0 8px;
+      .Controls .PageIndicator { 
+         background: transparent; border: none; font-weight: 550; color: #ccc; padding: 0 8px;
          min-width: 100px; text-align: center; font-size: 0.95rem; 
       }
 
-      .canvas-wrapper {
-         background: #e9edf4; border-radius: 20px; padding: 12px; display: flex; justify-content: center; align-items: center; 
-         min-height: 500px; position: relative; overflow: hidden; box-shadow: inset 0 2px 6px rgba(0,0,0,0.02);
+      .Canvas {
+         background: #0000; border-radius: 20px; padding: 12px; display: flex; justify-content: center; align-items: center; 
+         min-height: 90%; overflow: hidden; position: relative; top: 40px; width: 100%; image-rendering: auto !important;
       }
 
       #pdfCanvas { 
-         max-width: 100%; height: auto; background: white; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); 
-         border-radius: 12px; display: block; transition: opacity 0.2s;
+         max-width: 100%; height: auto; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); border-radius: 40px; display: block; transition: opacity 0.2s;
+         direction: ltr !important; text-rendering: optimizeLegibility !important; -webkit-font-smoothing: antialiased !important; 
+         -moz-osx-font-smoothing: grayscale !important;
       }
 
-      .placeholder-text { 
-         color: #94a3b8; font-size: 1.1rem; padding: 40px 20px; text-align: center; background: #f1f5f9; border-radius: 18px; width: 100%;
+      .placeholder { 
+         color: #94a3b8; font-size: 1.1rem; padding: 40px 20px; text-align: center; background: #0000; border-radius: 18px; width: 100%;
       }
 
-      .footer-note {
-         margin-top: 16px; color: #64748b; font-size: 0.8rem; text-align: center; border-top: 1px solid #e9edf4; padding-top: 16px;
-      }
+   </style>
 
-      /* حالت نمایش موبایل */
-      @media (max-width: 640px) {
-         .app-container { padding: 16px; } .upload-area { flex-direction: column; align-items: stretch; }
-         .file-info { max-width: 100%; white-space: normal; } .controls { border-radius: 28px; padding: 12px; gap: 8px; }
-         .controls button { padding: 6px 14px; font-size: 0.85rem; }
-      }
-    </style>
 </head>
 <body>
-   <div class="app-container">
 
-      <div class="upload-area">
-         <label for="fileInput" class="file-label"> 📂 انتخاب فایل PDF </label>
-         <input type="file" id="fileInput" accept=".pdf">
-         <span class="file-info" id="fileName">هیچ فایلی انتخاب نشده</span>
-         <span class="status-badge" id="statusBadge">⏳ آماده</span>
+      <div class="uploader">
+         <label for="FileInput" class="Filelabel"> 📂 انتخاب فایل PDF </label>
+         <input type="file" id="FileInput" accept=".pdf">
+         <span class="FileInfo" id="FileName">هیچ فایلی انتخاب نشده</span>
+         <span class="Status" id="Status">⏳ آماده</span>
       </div>
 
-      <div class="controls">
-         <button id="prevPage" disabled>◀ قبلی</button>
-         <span class="page-indicator" id="pageIndicator">صفحه ۰ از ۰</span>
-         <button id="nextPage" disabled>بعدی ▶</button>
-         <button id="goToFirst" disabled>⏮ ابتدا</button>
-         <button id="goToLast" disabled>⏭ انتها</button>
+      <div class="Controls">
+         <button id="PrevPage" disabled>◀ قبلی</button>
+         <span class="PageIndicator" id="PageIndicator">صفحه ۰ از ۰</span>
+         <button id="NextPage" disabled>بعدی ▶</button>
+         <button id="GoToFirst" disabled>⏮ ابتدا</button>
+         <button id="GoToLast" disabled>⏭ انتها</button>
+         <button id="Printer">Print 📄</button>
       </div>
 
-      <div class="canvas-wrapper">
+      <div class="canvas">
          <canvas id="pdfCanvas"></canvas>
-         <div id="placeholder" class="placeholder-text"> 📄 فایل PDF را انتخاب کنید<br>
+         <div id="placeholder" class="placeholder"> 📄 فایل PDF را انتخاب کنید<br>
             <span style="font-size:0.9rem; color:#94a3b8;">(کتاب‌های حجیم تا ۳۰۰+ صفحه بهینه شده)</span>
          </div>
       </div>
 
-   </div>
-
-   <script src="./JavaScript.js"></script>
-
+   <script src="./Script.js"></script>
+   
 </body>
 </html>
