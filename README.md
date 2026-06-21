@@ -16,7 +16,7 @@
 
 ### 📥 How to Get It
 ```bash
-git clone https://github.com/AmirAliV88/My-Book-reader.git
+git clone https://github.com/AmirAliV88/My-Books.git
 ```
 Then double-click on `Page.html` to open it in your browser.
 
@@ -52,7 +52,7 @@ MIT License - Free to use and modify
 
 ### 📥 نحوه دریافت
 ```bash
-git clone https://github.com/AmirAliV88/My-Book-reader.git
+git clone https://github.com/AmirAliV88/My-Books.git
 ```
 بعد روی فایل `Page.html` دابل‌کلیک کن تا تو مرورگر باز بشه.
 
