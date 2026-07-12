@@ -3,79 +3,7 @@
 
    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>📖 Book PDF WebReader</title>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-
-   <style>
-
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-
-      body { 
-         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #222; display: flex; 
-         flex-direction: column; align-items: center; min-height: 100vh; padding: 20px; color: #ddd;
-      }
-
-      .uploader { 
-         display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 18px 22px; margin-bottom: 24px; transition: 0.2s; 
-         position: absolute; right: 0; top: 0;
-      }
-
-      .FileLabel {
-         background: #3b83f6a9; color: #ddd; padding: 8px 22px; border-radius: 40px; font-weight: 500; cursor: pointer;
-         display: inline-flex; align-items: center; gap: 8px; transition: 0.2s; border: none; font-size: 0.95rem;
-         box-shadow: 0 4px 8px rgba(59, 130, 246, 0.25);
-      }
-
-      .FileLabel:hover { background: #216fec; }
-
-      .file-FileLabel:hover { background: #2563eb; transform: scale(1.01); } #fileInput { display: none; }
-
-      .FileInfo {
-         flex: 1; color: #ddd; font-weight: 700; padding: 6px 16px; white-space: nowrap; overflow: hidden; 
-         text-overflow: ellipsis; max-width: 300px;
-      }
-
-      .Status { 
-         background: #e9edf4; padding: 6px 18px; border-radius: 30px; font-size: 1.2rem; color: #334155;
-         font-weight: 700; display: flex; align-items: center; gap: 6px;
-      }
-
-      .Status.loading { background: #fef9c3; color: #854d0e; }
-      .Status.success { background: #dcfce7; color: #166534; }
-
-      .Controls {
-         display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 14px; padding: 10px 8px; margin-bottom: 20px;
-         position: absolute; left: 0; top: 0;
-      }
-
-      .Controls button { 
-         border: none; padding: 2px 18px; border-radius: 40px; font: 900 1.5rem system-ui; display: inline-flex;
-         align-items: center; background-color: #0000; gap: 6px; cursor: pointer; transition: 0.15s; color: #ddd;
-      }
-
-      .Controls button:hover:not(:disabled) { background: #0000; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06); }
-
-      .Controls button:disabled { opacity: 0.7; cursor: not-allowed; }
-
-      .Controls .PageIndicator { 
-         background: transparent; border: none; font-weight: 550; color: #ccc; padding: 0 8px;
-         min-width: 100px; text-align: center; font-size: 0.95rem; 
-      }
-
-      .Canvas {
-         background: #0000; border-radius: 20px; padding: 12px; display: flex; justify-content: center; align-items: center; 
-         min-height: 90%; overflow: hidden; position: relative; top: 40px; width: 100%; image-rendering: auto !important;
-      }
-
-      #pdfCanvas { 
-         max-width: 100%; height: auto; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); border-radius: 40px; display: block; transition: opacity 0.2s;
-         direction: ltr !important; text-rendering: optimizeLegibility !important; -webkit-font-smoothing: antialiased !important; 
-         -moz-osx-font-smoothing: grayscale !important;
-      }
-
-      .placeholder { 
-         color: #94a3b8; font-size: 1.1rem; padding: 40px 20px; text-align: center; background: #0000; border-radius: 18px; width: 100%;
-      }
-
-   </style>
+   <link rel="stylesheet" href="Styles.css">
 
 </head>
 <body>
@@ -88,11 +16,11 @@
       </div>
 
       <div class="Controls">
-         <button id="PrevPage" disabled>◀ قبلی</button>
          <span class="PageIndicator" id="PageIndicator">صفحه ۰ از ۰</span>
-         <button id="NextPage" disabled>بعدی ▶</button>
-         <button id="GoToFirst" disabled>⏮ ابتدا</button>
-         <button id="GoToLast" disabled>⏭ انتها</button>
+         <button id="PrevPage" disabled>▶ قبلی</button>
+         <button id="NextPage" disabled>بعدی ◀</button>
+         <button id="GoToFirst" disabled>⏭ ابتدا</button>
+         <button id="GoToLast" disabled>⏮ انتها</button>
          <button id="Printer">Print 📄</button>
       </div>
 
