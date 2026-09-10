@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Video Player</title>
+   <link rel="stylesheet" href="./static/Video.Styles.css">
+</head>
+<body>
+
+   <div class="app" id="app">
+
+      <div class="stage" id="stage">
+         <video id="video" playsinline></video>
+         <div class="empty-state" id="emptyState">
+            <div class="ico">🎬</div> <div class="txt"> یه ویدیو وا کن ببینیم | Open a Video </div>
+         </div>
+         <div class="scrub"><div class="scrub-fill" id="scrubFill"></div></div>
+      </div>
+
+
+      <!-- OPEN BUTTON (separate from settings box) -->
+      <div class="topbar">
+         <button class="open-btn glass" id="openBtn" title="باز کردن فایل">
+            <span class="open-icon">📂</span>
+            <span class="open-info">
+               <span class="fname" id="fname">Open File</span><span class="fmeta" id="fmeta"></span>
+            </span>
+         </button>
+      </div>
+
+      <!-- SETTINGS / CONTROL DOCK -->
+      <div class="dock">
+
+         <div class="settings glass" id="settingsBox">
+
+            <div class="settings-gear" id="settingsGear">⚙</div>
+
+            <div class="settings-panel" id="settingsPanel">
+
+               <button class="ctl-btn" data-action="prev" title="Perv (←)"> 
+                  <span class="ic">⏪</span><span class="tag">10s</span>
+               </button>
+
+               <button class="ctl-btn" data-action="play" id="playBtn" title="Play/Stop (Space)">
+                  <span class="ic" id="playIcon">▶</span><span class="tag">Space</span>
+               </button>
+
+               <button class="ctl-btn" data-action="next" title="Next (→)">
+                  <span class="ic">⏩</span><span class="tag">10s</span>
+               </button>
+
+               <div class="divider"></div>
+
+               <button class="ctl-btn" data-action="mute" id="muteBtn" title="خفه کن | Mute (Alt+U)">
+                  <span class="ic" id="muteIcon">🔊</span><span class="tag">Alt+U</span>
+               </button>
+
+               <button class="ctl-btn" data-action="speed" id="speedBtn" title="سرعت پخش | Play Speed (Alt+M)">
+                  <span class="ic" id="speedIcon">1×</span><span class="tag">Alt+M</span>
+               </button>
+
+               <button class="ctl-btn" data-action="browser" id="browserBtn" title="Browser ctrl (controls) (Ctrl+B)">
+                  <span class="ic">🧭</span><span class="tag">Ctrl+B</span>
+               </button>
+
+            </div>
+
+         </div>
+
+      </div>
+
+      <input type="file" id="fileInput" accept="video/*" hidden>
+
+   </div>
+
+   <script src="./static/Video.Scripts.js"></script>
+
+</body>
+</html>
