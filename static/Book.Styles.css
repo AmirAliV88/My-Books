@@ -59,8 +59,8 @@ body {
    border-radius: 15px;
    width: auto;
    height: 35px;
-   background-color: #0006;
-   backdrop-filter: url(#Glass) blur(2px);
+   background-color: #0004;
+   backdrop-filter: url(#Glass) blur(1px);
    box-shadow: 2px 2px 10px #eee4;
 }
 

@@ -7,7 +7,7 @@
    --glass-border: rgba(255,255,255,0.10);
    --glass-shadow: inset 7px 7px 20px #00000017, inset 7px -7px 20px #00000017, inset -7px 7px 20px #00000017, inset -7px -7px 20px #00000017;
    --text-main:#eceff5;
-   --text-dim:#ced3df;
+   --text-dim:#eef3ff;
    --accent:#6fb3ff;
    --accent-soft: rgba(5, 34, 66, 0.644);
    --radius-lg: 50px;
@@ -195,10 +195,14 @@ video { width: 100%; height: 100%; object-fit: contain; background: #000; displa
 
 
 
-.ctl-btn .ic { font-size: 17px; filter: blur(.8px); transition: filter .42s ease; text-shadow: 5px 5px 4px #000a, 5px -5px 4px #000a; }
+.ctl-btn .ic {font-size: 17px;filter: blur(.8px);transition: filter .42s ease;text-shadow: 3px 3px 4px #000000ab, 3px -3px 4px #000000ab, -3px 3px 4px #000000ab, -3px -3px 4px #000000ab;}
 .ctl-btn .tag {
-   font-size: 9.5px; color: var(--text-dim); filter: blur(.8px); transition: filter .42s ease; 
-   font-variant-numeric: tabular-nums; text-shadow: 5px 5px 4px #000a, 5px -5px 4px #000a;
+   font-size: 9.5px;
+   color: var(--text-dim);
+   filter: blur(.8px);
+   transition: filter .42s ease;
+   font-variant-numeric: tabular-nums;
+   text-shadow: 3px 3px 4px #000000ab, 3px -3px 4px #000000ab, -3px 3px 4px #000000ab, -3px -3px 4px #000000ab;
 }
 .ctl-btn:hover .ic, .ctl-btn:hover .tag { filter: blur(0); opacity: 1; }
 .ctl-btn.active { background: rgba(0, 14, 31, 0.692); }
